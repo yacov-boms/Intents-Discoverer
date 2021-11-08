@@ -1,5 +1,6 @@
-# A multi class text classification model
+# A multi class text classification model to identify customer query intents
 #
+# Import packages
 from IntClean import clean_example
 import numpy as np 
 import pandas as pd
@@ -24,7 +25,7 @@ X = [clean_example(ex.lower()) for ex in examples]  # List of queries
 y = labels
 classes = list(set(df['label']))
 
-# Creating The tokens Matrix (queries, max_query_length)
+# Create The tokens Matrix (queries, max_query_length)
 vocab_size = 1000
 max_query_len = 15
 oov_token = "<OOV>"
@@ -80,45 +81,21 @@ accuracy=sum(np.array(y)==np.array(label_pred))/len(y)
 print('Accuracy: ', accuracy)
 endTime = time.time()
 print('Time:', endTime - startTime, 'seconds')
+
 # Time: 1210.40
-# n=177 ep=90 lr=0.001   dim=300   hidden=1  0.7231   
-# n=177 ep=90 lr=0.001   dim=300   hidden=2  0.7118   
-# n=177 ep=80 lr=0.001   dim=300   hidden=1  0.7231   
+#
 # n=177 ep=70 lr=0.001   dim=300   hidden=1  0.7457   
 # n=177 ep=60 lr=0.001   dim=300   hidden=1  0.7288   
 # n=177 ep=50 lr=0.001   dim=300   hidden=1  0.7231   
 # n=177 ep=40 lr=0.001   dim=300   hidden=1  0.7231   0.7401  
 # n=177 ep=30 lr=0.001   dim=300   hidden=1  0.7175   
 # n=177 ep=30 lr=0.002   dim=300   hidden=1  0.7344   0.7175  0.7288  0.7344 
-# n=177 ep=30 lr=0.003   dim=300   hidden=1  0.7175   
-# n=177 ep=30 lr=0.004   dim=300   hidden=1  0.7288   
-# n=177 ep=30 lr=0.005   dim=300   hidden=1  0.7231   
-# n=177 ep=30 lr=0.006   dim=300   hidden=1  0.7344   
-# n=177 ep=30 lr=0.007   dim=300   hidden=1  0.7231   
 # n=177 ep=30 lr=0.008   dim=300   hidden=1  0.7401   
 # n=177 ep=30 lr=0.009   dim=300   hidden=1  0.7683   0.7344  0.7288  
 # n=177 ep=30 lr=0.01    dim=300   hidden=1  0.7231   0.7514  0.7683   
 # n=177 ep=25 lr=0.01    dim=300   hidden=1  0.7627   0.7457  0.7514  0.7627
 # n=177 ep=30 lr=0.011   dim=300   hidden=1  0.7514   
-# n=177 ep=30 lr=0.012   dim=300   hidden=1  0.7344   
-# n=177 ep=30 lr=0.012   dim=300   hidden=1  0.7175   
-# n=177 ep=40 lr=0.001   dim=300   hidden=0  0.4293   
+
 
  
-# Export to Excel  ------------------------------------------------------------
-# writer = pd.ExcelWriter(r'C:\Users\Administrator\Desktop\IntentsKeras.xlsx', engine='xlsxwriter')
-# df.to_excel(writer, sheet_name='Sheet1', index = False)
-# workbook  = writer.book
-# worksheet = writer.sheets['Sheet1']
-# worksheet.set_column('A:A', 4, None)
-# worksheet.set_column('B:B', 30, None)
-# worksheet.set_column('C:C', 10, None)
-# worksheet.set_column('D:D', 10, None)
-# worksheet.set_column('E:E', 20, None)
-# writer.save()
 
-# token_list = ' '.join(X).split()
-# token_list = [w.lower() for w in token_list]
-# import nltk
-# fdist = nltk.FreqDist(token_list)
-# fdist.most_common()
